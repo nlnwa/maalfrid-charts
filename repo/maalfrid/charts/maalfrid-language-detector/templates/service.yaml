@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "maalfrid-language-detector.fullname" . }}
+  labels:
+    app: {{ template "maalfrid-language-detector.name" . }}
+    chart: {{ template "maalfrid-language-detector.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
+  selector:
+    app: {{ template "maalfrid-language-detector.name" . }}
+    release: {{ .Release.Name }}

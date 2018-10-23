@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "maalfrid-language-detector.fullname" . }}
+  labels:
+    app: {{ template "maalfrid-language-detector.name" . }}
+    chart: {{ template "maalfrid-language-detector.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "maalfrid-language-detector.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "maalfrid-language-detector.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["serve", "--debug"]
+          ports:
+            - name: grpc
+              containerPort: 8672
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "8672"
+            - name: COUNT
+              value: {{ .Values.config.count | quote }}
+            - name: MAX_RECV_MSG_SIZE
+              value: {{ .Values.config.maxRecvMsgSize | quote }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

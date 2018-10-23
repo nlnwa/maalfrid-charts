@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "maalfrid-service.fullname" . }}
+  labels:
+    app: {{ template "maalfrid-service.name" . }}
+    chart: {{ template "maalfrid-service.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "maalfrid-service.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "maalfrid-service.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+  {{- if .Values.hostAliases }}
+      hostAliases:
+{{ toYaml .Values.hostAliases | indent 8 }}
+  {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: {{ .Values.config.nodeEnv | quote }}
+            - name: PATH_PREFIX
+              value: {{ .Values.config.pathPrefix | quote }}
+            - name: LOG_LEVEL
+              value: {{ .Values.config.logLevel | quote }}
+            - name: PORT
+              value: {{ .Values.service.port | quote }}
+            - name: LANGUAGE_SERVICE_HOST
+            {{- if .Values.config.languageDetector.host }}
+              value: {{ .Values.config.languageDetector.host | quote }}
+            {{- else }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "maalfrid.fullname" . }}
+                  key: languageDetector.host
+            {{- end }}
+            - name: LANGUAGE_SERVICE_PORT
+            {{- if .Values.config.languageDetector.port }}
+              value: {{ .Values.config.languageDetector.port | quote }}
+            {{- else }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "maalfrid.fullname" . }}
+                  key: languageDetector.port
+            {{- end }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

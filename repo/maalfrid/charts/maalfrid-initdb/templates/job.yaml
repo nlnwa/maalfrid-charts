@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "maalfrid-initdb.fullname" . }}
+  labels:
+    app: maalfrid
+    component: {{ template "maalfrid-initdb.name" . }}
+    chart: {{ template "maalfrid-initdb.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+{{ toYaml .Values.annotations | indent 4 }}
+spec:
+  template:
+    metadata:
+      name: {{ template "maalfrid-initdb.fullname" . }}
+    spec:
+      restartPolicy: {{ .Values.image.restartPolicy | quote }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+          - configMapRef:
+              name: {{ template "maalfrid.fullname" . }}-rethinkdb-env
+              optional: false
+          - secretRef:
+              name: {{ template "maalfrid.fullname" . }}-rethinkdb-env

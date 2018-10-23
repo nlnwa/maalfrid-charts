@@ -1,0 +1,22 @@
+# Default values for maalfrid-initdb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: norsknettarkiv/maalfrid-initdb
+  tag: ""
+  pullPolicy: IfNotPresent
+  restartPolicy: Never
+
+nameOverride: ""
+fullnameOverride: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+annotations:
+  # This is what defines this resource as a hook. Without this line, the
+  # job is considered part of the release.

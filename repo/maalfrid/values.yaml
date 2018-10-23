@@ -1,0 +1,22 @@
+
+config:
+  languageDetector:
+    host: ""
+    port: ""
+
+default:
+  languageDetector:
+    host: "maalfrid-language-detector"
+    port:  "8672"
+
+  rethinkdb:
+    host: "localhost"
+    port: "28015"
+    name: "maalfrid"
+    user: "admin"
+    password: "rethinkdb"
+
+maalfrid-initdb:
+  annotations:
+    "helm.sh/hook": "post-install,pre-upgrade"
+    "helm.sh/hook-delete-policy": "before-hook-creation"
