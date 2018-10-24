@@ -36,6 +36,24 @@ spec:
           env:
             - name: PORT
               value: {{ .Values.service.port | quote }}
+            - name: LANGUAGE_SERVICE_HOST
+            {{- if .Values.config.languageDetector.host }}
+              value: {{ .Values.config.languageDetector.host | quote }}
+            {{- else }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "maalfrid.fullname" . }}
+                  key: languageDetector.host
+            {{- end }}
+            - name: LANGUAGE_SERVICE_PORT
+            {{- if .Values.config.languageDetector.port }}
+              value: {{ .Values.config.languageDetector.port | quote }}
+            {{- else }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ template "maalfrid.fullname" . }}
+                  key: languageDetector.port
+            {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}

@@ -46,3 +46,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+config:
+  languageDetector:
+    host: ""
+    port: ""
