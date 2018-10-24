@@ -1,13 +1,31 @@
 
+nameOverride: ""
+fullnameOverride: ""
+
 config:
   languageDetector:
     host: ""
     port: ""
 
+  aggregatorService:
+    host: ""
+    port: ""
+
+  rethinkdb:
+    host: ""
+    port: ""
+    name: ""
+    user: ""
+    password: ""
+
 default:
   languageDetector:
     host: "maalfrid-language-detector"
     port:  "8672"
+
+  aggregatorService:
+    host: "maalfrid-aggregator-service"
+    port: "3011"
 
   rethinkdb:
     host: "localhost"

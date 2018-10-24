@@ -17,6 +17,6 @@ tolerations: []
 
 affinity: {}
 
-annotations:
+annotations: {}
   # This is what defines this resource as a hook. Without this line, the
   # job is considered part of the release.

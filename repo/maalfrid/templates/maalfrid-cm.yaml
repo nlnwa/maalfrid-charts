@@ -10,3 +10,5 @@ metadata:
 data:
   languageDetector.host: {{ default (include "maalfrid.languageDetector.host" .) .Values.config.languageDetector.host | quote }}
   languageDetector.port: {{ default .Values.default.languageDetector.port .Values.config.languageDetector.port | quote }}
+  aggregatorService.host: {{ default (include "maalfrid.aggregatorService.host" .) .Values.config.aggregatorService.host | quote }}
+  aggregatorService.port: {{ default .Values.default.aggregatorService.port .Values.config.aggregatorService.port | quote }}
