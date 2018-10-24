@@ -6,7 +6,7 @@ PACKAGE_DIR=/tmp/out
 mkdir -p ${PACKAGE_DIR}
 
 # Package charts (except veidemann)
-find repo/ -name Chart.yaml -maxdepth 1 -printf "%h\n" | xargs helm package -u -d ${PACKAGE_DIR}
+find repo/ -maxdepth 2 -name Chart.yaml -printf "%h\n" | xargs helm package -u -d ${PACKAGE_DIR}
 
 # Checkout gh-pages
 git remote set-branches origin gh-pages
