@@ -26,7 +26,7 @@ before_script:
 - helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
 
 script:
-- find repo/ -name Chart.yaml -printf "%h\n" -maxdepth 1 | xargs helm lint --strict
+- find repo/ -maxdepth 2 -name Chart.yaml -printf "%h\n" | xargs helm lint --strict
 
 # Setup GIT
 before_deploy:
