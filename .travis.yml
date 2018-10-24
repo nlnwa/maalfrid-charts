@@ -1,0 +1,59 @@
+sudo: false
+
+notifications:
+  email: false
+
+git:
+  depth: 1
+
+env:
+  global:
+  - HELM_VERSION="v2.11.0"
+  - REPO_URL="https://nlnwa.github.io/charts"
+
+# Install helm
+install:
+- wget -q https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O /tmp/helm.tar.gz
+- tar xvzf /tmp/helm.tar.gz -C /tmp --strip-components=1
+- mkdir -p $HOME/bin
+- export PATH=$PATH:$HOME/bin
+- mv /tmp/helm $HOME/bin
+- chmod +x $HOME/bin/helm
+
+# Initialize helm
+before_script:
+- helm init --client-only
+- helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
+
+script:
+# Helm lint (shold use --strict but some charts is not strictly valid yet)
+- find repo/ -name Chart.yaml -printf "%h\n" | xargs helm lint
+
+# Setup GIT
+before_deploy:
+- |
+  declare -r SSH_FILE=$(mktemp -u $HOME/.ssh/XXXXX)
+
+
+  openssl aes-256-cbc
+  -K $encrypted_d8b73204d25e_key \
+  -iv $encrypted_d8b73204d25e_iv \
+  -in ".travis/github_deploy_key.enc" \
+  -out "$SSH_FILE" \
+  -d
+
+  chmod 600 $SSH_FILE
+
+  printf "%s\n" \
+    "Host github.com" \
+    " IdentityFile $SSH_FILE" \
+    " LogLevel ERROR" >> $HOME/.ssh/config
+
+  git config user.name "$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+  git config user.email "$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
+
+deploy:
+- provider: script
+  script: bash .travis/deploy.sh
+  on:
+    branch: master
