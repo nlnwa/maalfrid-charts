@@ -9,7 +9,7 @@ git:
 env:
   global:
   - HELM_VERSION="v2.11.0"
-  - REPO_URL="https://nlnwa.github.io/charts"
+  - REPO_URL="https://nlnwa.github.io/maalfrid-charts"
 
 # Install helm
 install:
@@ -33,7 +33,6 @@ script:
 before_deploy:
 - |
   declare -r SSH_FILE=$(mktemp -u $HOME/.ssh/XXXXX)
-
 
   openssl aes-256-cbc
   -K $encrypted_d8b73204d25e_key \
