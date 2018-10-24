@@ -11,16 +11,15 @@ env:
   - HELM_VERSION="v2.11.0"
   - REPO_URL="https://nlnwa.github.io/maalfrid-charts"
 
-# Install helm
 install:
-- wget -q https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O /tmp/helm.tar.gz
+- wget -q https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz
+  -O /tmp/helm.tar.gz
 - tar xvzf /tmp/helm.tar.gz -C /tmp --strip-components=1
 - mkdir -p $HOME/bin
 - export PATH=$PATH:$HOME/bin
 - mv /tmp/helm $HOME/bin
 - chmod +x $HOME/bin/helm
 
-# Initialize helm
 before_script:
 - helm init --client-only
 - helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
@@ -28,17 +27,11 @@ before_script:
 script:
 - find repo/ -maxdepth 2 -name Chart.yaml -printf "%h\n" | xargs helm lint --strict
 
-# Setup GIT
 before_deploy:
 - |
   declare -r SSH_FILE=$(mktemp -u $HOME/.ssh/XXXXX)
 
-  openssl aes-256-cbc
-  -K $encrypted_d8b73204d25e_key \
-  -iv $encrypted_d8b73204d25e_iv \
-  -in ".travis/github_deploy_key.enc" \
-  -out "$SSH_FILE" \
-  -d
+  openssl aes-256-cbc -K $encrypted_cbf46289c180_key -iv $encrypted_cbf46289c180_iv -in .travis/github_deploy_key.enc -out "$SSH_FILE" -d
 
   chmod 600 $SSH_FILE
 
