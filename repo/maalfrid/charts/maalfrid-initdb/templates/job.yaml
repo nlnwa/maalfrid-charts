@@ -26,3 +26,4 @@ spec:
               optional: false
           - secretRef:
               name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
+              optional: false
