@@ -3,7 +3,16 @@ entries:
   maalfrid:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-10-25T09:28:26.097446107Z
+    created: 2018-10-25T13:05:06.877311501Z
+    description: A Helm chart for Kubernetes
+    digest: 48b982477850c08ea26d97a6e8aec35aeb974f90e2f42e4fdd5fff151b5a1a09
+    name: maalfrid
+    urls:
+    - https://nlnwa.github.io/maalfrid-charts/maalfrid-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2018-10-25T13:05:06.876008419Z
     description: A Helm chart for Kubernetes
     digest: 380fd0d163bc75699861b9d2ce5436f2cd2732b6305b5e36362b432dfa9603c3
     name: maalfrid
@@ -12,7 +21,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-10-25T09:28:26.096507515Z
+    created: 2018-10-25T13:05:06.874815095Z
     description: A Helm chart for Kubernetes
     digest: 51d366b44fd301d20206c1ce6b0640a906c69d45ec3a404fff22e1c2ff02dc58
     name: maalfrid
@@ -22,11 +31,11 @@ entries:
   maalfrid-aggregator-job:
   - apiVersion: v1
     appVersion: v1.0.0
-    created: 2018-10-25T09:28:26.097689173Z
+    created: 2018-10-25T13:05:06.877590388Z
     description: A Helm chart for Kubernetes
-    digest: 665d33529ca5f192f7b18608f1bafda8c85be7bfdd6fc7e89a5716d695755c2e
+    digest: a3f8a6c30243daa2961d0a3286337aeb2f6c02fedf9e3ff9721b6f13e76da197
     name: maalfrid-aggregator-job
     urls:
     - https://nlnwa.github.io/maalfrid-charts/maalfrid-aggregator-job-0.1.0.tgz
     version: 0.1.0
-generated: 2018-10-25T09:28:26.095377237Z
+generated: 2018-10-25T13:05:06.873460024Z
