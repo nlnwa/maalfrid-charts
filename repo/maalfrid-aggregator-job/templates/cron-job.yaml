@@ -22,7 +22,7 @@ spec:
             - name: {{ .Chart.Name }}
               image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
-              commands:
+              command:
 {{ toYaml .Values.config.commands | indent 16 }}
               env:
                 - name: HOST
