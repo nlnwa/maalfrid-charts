@@ -43,6 +43,3 @@ maalfrid-initdb:
       database: "maalfrid"
       user: "maalfrid"
       password: "maalfrid"
-  annotations:
-    "helm.sh/hook": "pre-install,pre-upgrade"
-    "helm.sh/hook-delete-policy": "after-success"
