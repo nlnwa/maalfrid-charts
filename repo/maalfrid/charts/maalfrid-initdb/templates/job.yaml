@@ -21,9 +21,17 @@ spec:
           image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
-          - configMapRef:
-              name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
-              optional: false
-          - secretRef:
-              name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
-              optional: false
+            - configMapRef:
+                name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
+                optional: false
+          env:
+            - name: DB_USER
+              value: {{ .Values.config.rethinkdb.user | quote }}
+            - name: DB_PASSWORD
+              value: {{ .Values.config.rethinkdb.password | quote }}
+            - name: CREATE_DB_NAME
+              value: {{ .Values.config.create.database | quote }}
+            - name: CREATE_DB_USER
+              value: {{ .Values.config.create.user | quote }}
+            - name: CREATE_DB_PASSWORD
+              value: {{ .Values.config.create.password | quote }}

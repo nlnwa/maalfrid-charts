@@ -20,3 +20,12 @@ affinity: {}
 annotations: {}
   # This is what defines this resource as a hook. Without this line, the
   # job is considered part of the release.
+
+config:
+  rethinkdb:
+    user: "admin"
+    password: ""
+  create:
+    database: "maalfrid"
+    user: "maalfrid"
+    password: "changeme"
