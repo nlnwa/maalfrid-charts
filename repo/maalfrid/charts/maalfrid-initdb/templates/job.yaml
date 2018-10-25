@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
           - configMapRef:
-              name: {{ template "maalfrid.fullname" . }}-rethinkdb-env
+              name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
               optional: false
           - secretRef:
-              name: {{ template "maalfrid.fullname" . }}-rethinkdb-env
+              name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env

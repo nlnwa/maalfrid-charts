@@ -29,10 +29,11 @@ spec:
               protocol: TCP
           envFrom:
             - configMapRef:
-                name: {{ template "maalfrid.fullname" . }}-rethinkdb-env
+                name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
                 optional: false
             - secretRef:
-                name: {{ template "maalfrid.fullname" . }}-rethinkdb-env
+                name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
+                optional: false
           env:
             - name: PORT
               value: {{ .Values.service.port | quote }}
@@ -42,7 +43,7 @@ spec:
             {{- else }}
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "maalfrid.fullname" . }}
+                  name: {{ template "maalfrid.configPrefix" . }}
                   key: languageDetector.host
             {{- end }}
             - name: LANGUAGE_SERVICE_PORT
@@ -51,7 +52,7 @@ spec:
             {{- else }}
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "maalfrid.fullname" . }}
+                  name: {{ template "maalfrid.configPrefix" . }}
                   key: languageDetector.port
             {{- end }}
           resources:
