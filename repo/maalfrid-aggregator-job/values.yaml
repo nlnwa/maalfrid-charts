@@ -28,6 +28,8 @@ tolerations: []
 
 affinity: {}
 
+restartPolicy: "Never"
+
 config:
   aggregatorService:
     host: ""

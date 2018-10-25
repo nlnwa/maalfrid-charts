@@ -17,11 +17,11 @@ spec:
             app.kubernetes.io/name: {{ include "maalfrid-aggregator-job.name" . }}
             app.kubernetes.io/instance: {{ .Release.Name }}
         spec:
+          restartPolicy: {{ .Values.restartPolicy }}
           containers:
             - name: {{ .Chart.Name }}
               image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
-              restartPolicy: "Never"
               commands:
 {{ toYaml .Values.config.commands | indent 16 }}
               env:
