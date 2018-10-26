@@ -43,6 +43,5 @@ config:
     host: ""
     port: ""
 
-
-  commands:
+  command:
     - version
