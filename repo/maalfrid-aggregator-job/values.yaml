@@ -30,12 +30,19 @@ affinity: {}
 
 restartPolicy: "Never"
 
+concurrencyPolicy: "Forbid" # Allow, Replace
+
+failedJobsHistoryLimit: 1
+
+successfulJobsHistoryLimit: 5
+
+cronExpression: "*/10 * * * *"
+
 config:
   aggregatorService:
     host: ""
     port: ""
 
-  cronExpression: "*/1 * * * *"
 
   commands:
     - version
