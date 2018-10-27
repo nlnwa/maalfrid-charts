@@ -43,3 +43,25 @@ maalfrid-initdb:
       database: "maalfrid"
       user: "maalfrid"
       password: "maalfrid"
+
+.aggregatorJob: &aggregatorJob
+  # restartPolicy: "Never"
+  # concurrencyPolicy: "Forbid"
+  # failedJobsHistoryLimit: 1
+  # successfulJobsHistoryLimit: 1
+  suspend: true
+  aggregatorService:
+    host: "maalfrid-aggregator-service"
+    port: "3011"
+
+detect-job:
+  <<: *aggregatorJob
+
+aggregate-job:
+  <<: *aggregatorJob
+
+sync-entities-job:
+  <<: *aggregatorJob
+
+sync-seeds-job:
+  <<: *aggregatorJob

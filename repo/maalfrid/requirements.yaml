@@ -1,0 +1,16 @@
+.aggregator-job: &aggregator-job
+  name: maalfrid-aggregator-job
+  version: 0.4.0
+  repository: file://../maalfrid-aggregator-job/
+  tags:
+  - aggregatorJob
+
+dependencies:
+- <<: *aggregator-job
+  alias: detect-job
+- <<: *aggregator-job
+  alias: aggregate-job
+- <<: *aggregator-job
+  alias: sync-seeds-job
+- <<: *aggregator-job
+  alias: sync-entities-job
