@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
+  suspend: {{ .Values.suspend }}
   schedule: {{ .Values.cronExpression | quote }}
   concurrencyPolicy: {{ .Values.concurrencyPolicy }}
   failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}

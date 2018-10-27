@@ -36,7 +36,9 @@ failedJobsHistoryLimit: 1
 
 successfulJobsHistoryLimit: 5
 
-cronExpression: "*/10 * * * *"
+suspend: false
+
+cronExpression: "0 * * * *"
 
 config:
   aggregatorService:
