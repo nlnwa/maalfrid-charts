@@ -36,7 +36,7 @@ spec:
                 optional: false
           env:
             - name: PORT
-              value: 3011
+              value: "3011"
             - name: LANGUAGE_SERVICE_HOST
             {{- if .Values.config.languageDetector.host }}
               value: {{ .Values.config.languageDetector.host | quote }}
