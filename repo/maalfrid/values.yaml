@@ -57,20 +57,24 @@ maalfrid-initdb:
 
 detect-job:
   <<: *aggregatorJob
-  command:
-  - detect
+  config:
+    command:
+    - detect
 
 aggregate-job:
   <<: *aggregatorJob
-  command:
-  - aggregate
+  config:
+    command:
+    - aggregate
 
 sync-entities-job:
   <<: *aggregatorJob
-  command:
-  - sync-entities
+  config:
+    command:
+    - sync-entities
 
 sync-seeds-job:
   <<: *aggregatorJob
-  command:
-  - sync-seeds
+  config:
+    command:
+    - sync-seeds
