@@ -30,9 +30,23 @@ spec:
 {{ toYaml .Values.config.command | indent 16 }}
               env:
                 - name: HOST
+                {{- if .Values.config.aggregatorService.host }}
                   value: {{ .Values.config.aggregatorService.host | quote }}
+                {{- else }}
+                  valueFrom:
+                    configMapKeyRef:
+                      name: {{ template "maalfrid-aggregator-job.configPrefix" . }}
+                      key: aggregatorService.host
+                {{- end }}
                 - name: PORT
+                {{- if .Values.config.aggregatorService.port }}
                   value: {{ .Values.config.aggregatorService.port | quote }}
+                {{- else }}
+                  valueFrom:
+                    configMapKeyRef:
+                      name: {{ template "maalfrid-aggregator-job.configPrefix" . }}
+                      key: aggregatorService.port
+                {{- end }}
               resources:
 {{ toYaml .Values.resources | indent 16 }}
     {{- with .Values.nodeSelector }}

@@ -50,10 +50,6 @@ maalfrid-initdb:
   # failedJobsHistoryLimit: 1
   # successfulJobsHistoryLimit: 1
   suspend: true
-  config:
-    aggregatorService:
-      host: "maalfrid-aggregator-service"
-      port: "3011"
 
 detect-job:
   <<: *aggregatorJob
