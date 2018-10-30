@@ -63,14 +63,7 @@ aggregate-job:
     command:
     - aggregate
 
-sync-entities-job:
+sync-job:
   <<: *aggregatorJob
-  config:
-    command:
-    - sync-entities
-
-sync-seeds-job:
-  <<: *aggregatorJob
-  config:
-    command:
-    - sync-seeds
+  command:
+  - sync
