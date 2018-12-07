@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: v0.1.0-alpha.6
 description: Maalfrid aggregator service
 name: maalfrid-aggregator-service
-version: 0.1.10
+version: 0.1.11
