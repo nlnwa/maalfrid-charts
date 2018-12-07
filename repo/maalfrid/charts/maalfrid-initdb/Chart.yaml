@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: v0.3.3
 description: Database initializer for målfrid
 name: maalfrid-initdb
-version: 0.2.4
+version: 0.2.5
