@@ -35,6 +35,10 @@ spec:
                 name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
                 optional: false
           env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
             - name: PORT
               value: "3011"
             - name: LANGUAGE_SERVICE_HOST
