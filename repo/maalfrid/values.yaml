@@ -1,4 +1,3 @@
-
 nameOverride: ""
 fullnameOverride: ""
 
@@ -55,15 +54,20 @@ detect-job:
   <<: *aggregatorJob
   config:
     command:
-    - detect
+      - detect
 
 aggregate-job:
   <<: *aggregatorJob
   config:
     command:
-    - aggregate
+      - aggregate
 
 sync-job:
   <<: *aggregatorJob
   command:
-  - sync
+    - sync
+
+statistics-job:
+  <<: *aggregatorJob
+  command:
+    - filter

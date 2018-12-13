@@ -12,3 +12,5 @@ dependencies:
   alias: aggregate-job
 - <<: *aggregator-job
   alias: sync-job
+- <<: *aggregator-job
+  alias: statistics-job
