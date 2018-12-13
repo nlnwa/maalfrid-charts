@@ -64,10 +64,12 @@ aggregate-job:
 
 sync-job:
   <<: *aggregatorJob
-  command:
-    - sync
+  config:
+    command:
+      - sync
 
 statistics-job:
   <<: *aggregatorJob
-  command:
-    - filter
+  config:
+    command:
+      - filter
