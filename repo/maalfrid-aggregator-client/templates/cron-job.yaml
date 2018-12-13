@@ -1,10 +1,10 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name:  {{ include "maalfrid-aggregator-job.fullname" . }}
+  name:  {{ include "maalfrid-aggregator-client.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "maalfrid-aggregator-job.name" . }}
-    helm.sh/chart: {{ include "maalfrid-aggregator-job.chart" . }}
+    app.kubernetes.io/name: {{ include "maalfrid-aggregator-client.name" . }}
+    helm.sh/chart: {{ include "maalfrid-aggregator-client.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
@@ -18,7 +18,7 @@ spec:
       template:
         metadata:
           labels:
-            app.kubernetes.io/name: {{ include "maalfrid-aggregator-job.name" . }}
+            app.kubernetes.io/name: {{ include "maalfrid-aggregator-client.name" . }}
             app.kubernetes.io/instance: {{ .Release.Name }}
         spec:
           restartPolicy: {{ .Values.restartPolicy }}
@@ -35,7 +35,7 @@ spec:
                 {{- else }}
                   valueFrom:
                     configMapKeyRef:
-                      name: {{ template "maalfrid-aggregator-job.configPrefix" . }}
+                      name: {{ template "maalfrid-aggregator-client.configPrefix" . }}
                       key: aggregatorService.host
                 {{- end }}
                 - name: PORT
@@ -44,7 +44,7 @@ spec:
                 {{- else }}
                   valueFrom:
                     configMapKeyRef:
-                      name: {{ template "maalfrid-aggregator-job.configPrefix" . }}
+                      name: {{ template "maalfrid-aggregator-client.configPrefix" . }}
                       key: aggregatorService.port
                 {{- end }}
               resources:

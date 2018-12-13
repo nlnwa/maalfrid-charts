@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "maalfrid-aggregator-job.name" -}}
+{{- define "maalfrid-aggregator-client.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "maalfrid-aggregator-job.fullname" -}}
+{{- define "maalfrid-aggregator-client.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,7 +27,7 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "maalfrid-aggregator-job.chart" -}}
+{{- define "maalfrid-aggregator-client.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -35,7 +35,7 @@ Create chart name and version as used by the chart label.
 Create a config prefix
 If release name contains chart name it will be used as a config prefix
 */}}
-{{- define "maalfrid-aggregator-job.configPrefix" -}}
+{{- define "maalfrid-aggregator-client.configPrefix" -}}
 {{- $name := "maalfrid" -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name -}}
