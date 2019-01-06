@@ -1,0 +1,65 @@
+# Default values for maalfrid.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+.hostname: &hostname veidemann.local
+
+.ingress: &ingress
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  hosts:
+    - *hostname
+  tls:
+    - secretName: local-veidemann-ingress-tls-cert
+      hosts:
+        - *hostname
+
+config:
+  rethinkdb:
+    user: admin
+    host: local-rethinkdb-proxy
+    password: "rethinkdb"
+
+maalfrid-service:
+  ingress:
+    <<: *ingress
+  config:
+    nodeEnv: development
+    logLevel: debug
+    pathPrefix: "/maalfrid/api"
+
+maalfrid-gui:
+  ingress:
+    <<: *ingress
+  config:
+    issuer: "https://veidemann.local/dex"
+    redirectUri: "https://veidemann.local/maalfrid"
+
+maalfrid-language-detector:
+  config:
+    count: 5
+    maxRecvMsgSize: "10000000"
+
+maalfrid-initdb:
+  config:
+    rethinkdb:
+      user: "admin"
+      password: "rethinkdb"
+    create:
+      password: "notSecret"
+  annotations:
+    helm.sh/hook: "post-install,pre-upgrade"
+    helm.sh/hook-delete-policy: "before-hook-creation"
+
+detect-job:
+  cronExpression: "* */1 * * *"
+
+aggregate-job:
+  cronExpression: "10 */1 * * *"
+
+sync-job:
+  cronExpression: "*/15 * * * *"
+
+statistics-job:
+  cronExpression: "4 * * * *"
