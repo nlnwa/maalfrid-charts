@@ -34,6 +34,9 @@ default:
     password: "maalfrid"
 
 maalfrid-initdb:
+  annotations:
+    "helm.sh/hook": "post-install,pre-upgrade"
+    "helm.sh/hook-delete-policy": "before-hook-creation"
   config:
     rethinkdb:
       user: "admin"
