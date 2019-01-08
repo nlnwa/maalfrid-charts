@@ -50,6 +50,7 @@ affinity: {}
 hostAliases: []
 
 config:
+  healthzApiKey: ""
   nodeEnv: production
   logLevel: info
   pathPrefix: "/maalfrid/api"

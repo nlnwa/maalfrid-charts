@@ -38,6 +38,8 @@ spec:
             - secretRef:
                 name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
           env:
+            - name: HEALTHZ_API_KEY
+              value: {{ .Values.config.healthzApiKey | quote }}
             - name: NODE_ENV
               value: {{ .Values.config.nodeEnv | quote }}
             - name: PATH_PREFIX
@@ -64,6 +66,17 @@ spec:
                   name: {{ template "maalfrid.configPrefix" . }}
                   key: languageDetector.port
             {{- end }}
+          livenessProbe:
+            httpGet:
+              path: "{{ .Values.config.pathPrefix }}/healthz?api_key={{ .Values.config.healthzApiKey }}"
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: "{{ .Values.config.pathPrefix }}/healthz?api_key={{ .Values.config.healthzApiKey }}"
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
