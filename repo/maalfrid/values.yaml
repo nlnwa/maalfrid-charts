@@ -46,33 +46,22 @@ maalfrid-initdb:
       user: "maalfrid"
       password: "maalfrid"
 
-.aggregatorJob: &aggregatorJob
-  # restartPolicy: "Never"
-  # concurrencyPolicy: "Forbid"
-  # failedJobsHistoryLimit: 1
-  # successfulJobsHistoryLimit: 1
-  suspend: true
-
 detect-job:
-  <<: *aggregatorJob
   config:
     command:
       - detect
 
 aggregate-job:
-  <<: *aggregatorJob
   config:
     command:
       - aggregate
 
 sync-job:
-  <<: *aggregatorJob
   config:
     command:
       - sync
 
 statistics-job:
-  <<: *aggregatorJob
   config:
     command:
       - filter

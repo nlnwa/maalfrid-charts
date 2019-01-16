@@ -28,15 +28,13 @@ tolerations: []
 
 affinity: {}
 
-restartPolicy: "Never"
-
-concurrencyPolicy: "Forbid" # Allow, Replace
+concurrencyPolicy: "Forbid" # "Allow", "Replace"
 
 failedJobsHistoryLimit: 1
 
 successfulJobsHistoryLimit: 5
 
-suspend: false
+suspend: true
 
 cronExpression: "0 * * * *"
 

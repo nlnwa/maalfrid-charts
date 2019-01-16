@@ -9,19 +9,21 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   suspend: {{ .Values.suspend }}
-  schedule: {{ .Values.cronExpression | quote }}
+  schedule: {{ .Values.cronExpression }}
   concurrencyPolicy: {{ .Values.concurrencyPolicy }}
   failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
   successfulJobHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 15
+      backoffLimit: 3
       template:
         metadata:
           labels:
             app.kubernetes.io/name: {{ include "maalfrid-aggregator-client.name" . }}
             app.kubernetes.io/instance: {{ .Release.Name }}
         spec:
-          restartPolicy: {{ .Values.restartPolicy }}
+          restartPolicy: OnFailure
           containers:
             - name: {{ .Chart.Name }}
               image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"

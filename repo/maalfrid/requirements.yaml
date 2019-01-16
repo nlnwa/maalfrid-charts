@@ -1,6 +1,6 @@
 .aggregator-job: &aggregator-job
   name: maalfrid-aggregator-client
-  version: 0.5.3
+  version: 0.5.5
   repository: file://../maalfrid-aggregator-client/
   tags:
   - aggregatorJob
