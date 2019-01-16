@@ -30,9 +30,9 @@ affinity: {}
 
 concurrencyPolicy: "Forbid" # "Allow", "Replace"
 
-failedJobsHistoryLimit: 1
+failedJobsHistoryLimit: 3
 
-successfulJobsHistoryLimit: 5
+successfulJobsHistoryLimit: 3
 
 suspend: true
 

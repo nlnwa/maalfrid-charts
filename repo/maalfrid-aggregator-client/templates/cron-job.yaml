@@ -15,8 +15,7 @@ spec:
   successfulJobHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 15
-      backoffLimit: 3
+      activeDeadlineSeconds: 120
       template:
         metadata:
           labels:
