@@ -18,6 +18,10 @@ spec:
       labels:
         app: {{ template "maalfrid-language-detector.name" . }}
         release: {{ .Release.Name }}
+    {{- with .Values.podAnnotations }}
+      annotations:
+{{ toYaml . | nindent 8 }}
+    {{- end }}
     spec:
       containers:
         - name: {{ .Chart.Name }}

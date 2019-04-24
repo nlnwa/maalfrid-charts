@@ -47,6 +47,8 @@ tolerations: []
 
 affinity: {}
 
+podAnnotations: {}
+
 config:
   count: 5
   maxRecvMsgSize: "10000000"

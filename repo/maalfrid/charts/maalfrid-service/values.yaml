@@ -49,12 +49,26 @@ affinity: {}
 
 hostAliases: []
 
+podAnnotations: {}
+
 config:
   healthzApiKey: ""
   nodeEnv: production
   logLevel: info
   pathPrefix: "/maalfrid/api"
 
+  rethinkdb:
+    host: ""
+    port: ""
+    name: ""
+
   languageDetector:
     host: ""
     port: ""
+
+global:
+  maalfrid:
+    rethinkdb:
+      host: ""
+      port: ""
+      name: ""

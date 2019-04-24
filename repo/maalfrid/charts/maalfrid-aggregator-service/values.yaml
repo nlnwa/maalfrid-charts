@@ -47,7 +47,21 @@ tolerations: []
 
 affinity: {}
 
+podAnnotations: {}
+
 config:
   languageDetector:
     host: ""
     port: ""
+
+  rethinkdb:
+    host: ""
+    port: ""
+    name: ""
+
+global:
+  maalfrid:
+    rethinkdb:
+      host: ""
+      port: ""
+      name: ""

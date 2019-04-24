@@ -20,11 +20,15 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          envFrom:
-            - configMapRef:
-                name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
-                optional: false
           env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DB_HOST
+              value: {{ default .Values.global.maalfrid.rethinkdb.host .Values.config.rethinkdb.host | quote }}
+            - name: DB_PORT
+              value: {{ default .Values.global.maalfrid.rethinkdb.port .Values.config.rethinkdb.port | quote }}
             - name: DB_USER
               value: {{ .Values.config.rethinkdb.user | quote }}
             - name: DB_PASSWORD

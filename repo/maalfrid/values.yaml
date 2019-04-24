@@ -11,9 +11,6 @@ config:
     port: ""
 
   rethinkdb:
-    host: ""
-    port: ""
-    name: ""
     user: ""
     password: ""
 
@@ -27,15 +24,17 @@ default:
     port: "3011"
 
   rethinkdb:
-    host: "localhost"
-    port: "28015"
-    name: "maalfrid"
     user: "maalfrid"
     password: "maalfrid"
 
+maalfrid-language-detector:
+  config:
+    count: 5
+    maxRecvMsgSize: "10000000"
+
 maalfrid-initdb:
   annotations:
-    "helm.sh/hook": "post-install,pre-upgrade"
+    "helm.sh/hook": "pre-install,pre-upgrade"
     "helm.sh/hook-delete-policy": "before-hook-creation"
   config:
     rethinkdb:
@@ -65,3 +64,11 @@ statistics-job:
   config:
     command:
       - filter
+
+
+global:
+  maalfrid:
+    rethinkdb:
+      host: $(NODE_NAME)
+      port: 28015
+      name: "maalfrid"

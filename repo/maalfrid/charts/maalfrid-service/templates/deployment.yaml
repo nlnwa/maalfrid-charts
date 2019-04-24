@@ -18,6 +18,10 @@ spec:
       labels:
         app: {{ template "maalfrid-service.name" . }}
         release: {{ .Release.Name }}
+    {{- with .Values.podAnnotations }}
+      annotations:
+{{ toYaml . | nindent 8 }}
+    {{- end }}
     spec:
   {{- if .Values.hostAliases }}
       hostAliases:
@@ -32,12 +36,19 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           envFrom:
-            - configMapRef:
-                name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
-                optional: false
             - secretRef:
                 name: {{ template "maalfrid.configPrefix" . }}-rethinkdb-env
           env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DB_HOST
+              value: {{ default .Values.global.maalfrid.rethinkdb.host .Values.config.rethinkdb.host | quote }}
+            - name: DB_PORT
+              value: {{ default .Values.global.maalfrid.rethinkdb.port .Values.config.rethinkdb.port | quote }}
+            - name: DB_NAME
+              value: {{ default .Values.global.maalfrid.rethinkdb.name .Values.config.rethinkdb.name | quote }}
             - name: HEALTHZ_API_KEY
               value: {{ .Values.config.healthzApiKey | quote }}
             - name: NODE_ENV

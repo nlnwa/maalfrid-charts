@@ -21,9 +21,18 @@ annotations: {}
 
 config:
   rethinkdb:
+    host: ""
+    port: ""
     user: "admin"
     password: ""
   create:
     database: "maalfrid"
     user: "maalfrid"
     password: "changeme"
+
+global:
+  maalfrid:
+    rethinkdb:
+      host: ""
+      port: ""
+      name: ""
