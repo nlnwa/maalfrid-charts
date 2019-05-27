@@ -41,8 +41,8 @@ staticClients:
   - maalfrid-gui
 - id: veidemann-dashboard
   redirectURIs:
-  - "https://veidemann.local/veidemann/activity"
-  - "https://localhost:4200/activity"
+  - "https://veidemann.local/veidemann"
+  - "https://localhost:4200/veidemann"
   name: "Veidemann Dashboard"
 - id: veidemann-cli
   public: true
