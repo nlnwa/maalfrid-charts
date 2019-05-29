@@ -15,6 +15,11 @@
       hosts:
         - *hostname
 
+.latest_image: &latest_image
+  image:
+    tag: latest
+    pullPolicy: Always
+
 config:
   rethinkdb:
     user: admin
@@ -22,6 +27,7 @@ config:
     password: "rethinkdb"
 
 maalfrid-service:
+  <<: *latest_image
   ingress:
     <<: *ingress
   config:
@@ -30,6 +36,7 @@ maalfrid-service:
     pathPrefix: "/maalfrid/api"
 
 maalfrid-gui:
+  <<: *latest_image
   ingress:
     <<: *ingress
   config:
@@ -37,11 +44,13 @@ maalfrid-gui:
     redirectUri: "https://veidemann.local/maalfrid"
 
 maalfrid-language-detector:
+  <<: *latest_image
   config:
     count: 5
     maxRecvMsgSize: "10000000"
 
 maalfrid-initdb:
+  <<: *latest_image
   config:
     rethinkdb:
       user: "admin"
@@ -52,14 +61,21 @@ maalfrid-initdb:
     helm.sh/hook: "post-install,pre-upgrade"
     helm.sh/hook-delete-policy: "before-hook-creation"
 
+maalfrid-aggregator-service:
+  <<: *latest_image
+
 detect-job:
+  <<: *latest_image
   cronExpression: "* */1 * * *"
 
 aggregate-job:
+  <<: *latest_image
   cronExpression: "10 */1 * * *"
 
 sync-job:
+  <<: *latest_image
   cronExpression: "*/15 * * * *"
 
 statistics-job:
+  <<: *latest_image
   cronExpression: "4 * * * *"
