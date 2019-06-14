@@ -47,6 +47,7 @@ staticClients:
 - id: veidemann-cli
   public: true
   name: "Veidemann CLI"
+  secret: cli-app-secret
 - id: veidemann-api
   name: "Veidemann API"
   trustedPeers:
