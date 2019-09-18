@@ -22,6 +22,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   path: /maalfrid
+
   hosts:
     - chart-example.local
   tls: []
