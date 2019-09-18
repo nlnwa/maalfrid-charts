@@ -20,11 +20,16 @@
     tag: latest
     pullPolicy: Always
 
+.rethinkdb_password_maalfrid: &rethinkdb_maalfrid_password notSecret
+
+global:
+  maalfrid:
+    rethinkdb:
+      host: local-rethinkdb-proxy
+
 config:
   rethinkdb:
-    user: admin
-    host: local-rethinkdb-proxy
-    password: "rethinkdb"
+    password: *rethinkdb_maalfrid_password
 
 maalfrid-service:
   <<: *latest_image
@@ -56,7 +61,7 @@ maalfrid-initdb:
       user: "admin"
       password: "rethinkdb"
     create:
-      password: "notSecret"
+      password: *rethinkdb_maalfrid_password
   annotations:
     helm.sh/hook: "post-install,pre-upgrade"
     helm.sh/hook-delete-policy: "before-hook-creation"
