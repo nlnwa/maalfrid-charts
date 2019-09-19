@@ -28,12 +28,16 @@ web:
   allowedOrigins:
   - https://veidemann.local
   - https://localhost:4200
+  - http://localhost:4200
   http: 0.0.0.0:8080
 staticClients:
 - id: maalfrid-gui
   redirectURIs:
   - 'https://veidemann.local/maalfrid'
+  - 'http://localhost:4200/maalfrid'
+  - 'http://localhost:4200/maalfrid/nb'
   - 'https://localhost:4200/maalfrid'
+  - 'https://localhost:4200/maalfrid/nb'
   name: 'Maalfrid GUI'
 - id: maalfrid-api
   name: 'Maalfrid API'
